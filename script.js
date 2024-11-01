@@ -105,17 +105,17 @@ function updateTimer() {
 
     updateProgressBarColor();
 
-    const accordionTimes = [0, -1, 4, 8, 12, 15, 17 ];
+    const accordionTimes = [0, -1, 4, 8, 12, 15, 17];
     const accordions = document.getElementsByClassName("accordion");
     const accordionSpans = document.getElementsByClassName("accordion-remain");
     const accordionTitles = document.getElementsByClassName("accordion-title");
 
-    const titles = ["捜査開始", "アリバイ", "DNA鑑定", "訪問者の痕跡", "いちごパック", "パソコン", "LIEN" ];
+    const titles = ["捜査開始", "アリバイ", "DNA鑑定", "訪問者の痕跡", "いちごパック", "パソコン", "LIEN"];
 
     for (let i = 0; i < accordions.length; i++) {
         if ((accordionTimes[i] === -1 && answerStage === 1) || (accordionTimes[i] != -1 && accordionTimes[i] * 60 <= elapsed)) {
             if (accordions[i].classList.contains("closed")) {
-                if(accordionTimes[i] != -1) accordionSpans[i].textContent = "";
+                if (accordionTimes[i] != -1) accordionSpans[i].textContent = "";
                 else {
                     const sideBarAccordion = document.querySelector(".side-bar-accordion");
                     sideBarAccordion.scrollTop = sideBarAccordion.scrollHeight;
@@ -128,7 +128,7 @@ function updateTimer() {
                 }
             }
         } else {
-            if(accordionTimes[i] != -1) accordionSpans[i].textContent = "あと " + makeTimeKirei(accordionTimes[i] * 60 - elapsed);
+            if (accordionTimes[i] != -1) accordionSpans[i].textContent = "あと " + makeTimeKirei(accordionTimes[i] * 60 - elapsed);
         }
     }
 
@@ -194,8 +194,8 @@ document.getElementById('confirmHint').addEventListener('click', () => {
                 case '懐中電灯':
                     hintMessage = '奈賀岡の指紋が検出された懐中電灯についた血を拭き取ったものだろう。しかし千田の体に打撲傷はない。<br>だとすると、奈賀岡が事件の犯人に抵抗するのに使ったにちがいない。懐中電灯（手袋）には犯人の血がついているはずだ。';
                     break;
-                case '包丁':
-                    hintMessage = '千田の指紋が検出された包丁だ。この物品から指紋は検出されていない。<br>とっさに起こった喧嘩ならば、手袋の用意は無いだろう。他殺説を高める証拠だ。';
+                case 'ナイフ':
+                    hintMessage = '千田の指紋が検出されたナイフだ。この物品から指紋は検出されていない。<br>とっさに起こった喧嘩ならば、手袋の用意は無いだろう。他殺説を高める証拠だ。';
                     break;
                 case 'ロープ':
                     hintMessage = '奈賀岡が吊られていたロープ。<br>体の強い人間ならば、打撲等で被害者を気絶させた後にロープで吊るというのも可能だろう。';
@@ -203,29 +203,35 @@ document.getElementById('confirmHint').addEventListener('click', () => {
                 case 'タバコ':
                     hintMessage = '窓際に落ちていたタバコ。燃え後を見るに、タバコを吸っている最中に突然殺されたのだろう。<br>被害者が開けた窓から犯人が侵入した可能性は否定できない。';
                     break;
-                case '布団':
-                    hintMessage = '飛び血を被った安物の布団。ここに血が被っているということは、犯人がドアから侵入した可能性は低そうだ。<br>このあたりを少し捜査するといいかもしれない。';
-                    break;
-                case '座布団':
-                    hintMessage = 'よくある感じの座布団だ。<br>3つあるということは、奈賀岡宅を訪れていたのは千田だけではなかったのかもしれない。';
-                    break;
                 case 'いちごパック':
                     hintMessage = '福岡産のいちごのパック。お土産だろうか？資料によると宮路が福岡に出張していたようだから彼はこの部屋を訪れていたのかもしれない。<br>何かでこれを立証できればいいが……。';
                     break;
                 case 'ティーカップ':
                     hintMessage = '酒ばかりのちゃぶ台に、ポツリとおかれたティーカップ。飲んだくれの被害者二人が使ったとは考えにくい。<br>千田の他にも来客がいたのだろう。唾液がついているはずだ。鑑定に掛けて確かめよう。';
                     break;
-                case '雑誌':
-                    hintMessage = 'よくある感じの雑誌だ。特に事件に関係は無いだろう。';
-                    break;
                 case '窓ガラス':
                     hintMessage = 'プランターに窓ガラスが飛び散っている。ガラスが外側に飛び散っているということは、窓は内側から割れたということだ。やはり喧嘩によるただの自殺事件なのか？....いや、犯人が事件の後に窓から脱出したという可能性は捨てきれない。';
+                    break;
+                case '座布団':
+                    hintMessage = 'よくある感じの座布団だ。<br>3つあるということは、奈賀岡宅を訪れていたのは千田だけではなかったのかもしれない。';
                     break;
                 case '卒アル':
                     hintMessage = '駒波高校の卒アル 2012 年度。奈賀岡、千田、宮路の名前が見て取れる。宮路の写真は後に合成された物のようだ。<br>不登校だったのか...?';
                     break;
                 default:
                     hintMessage = 'ヒントが見つかりません。';
+
+                /*
+                            <option value="懐中電灯">懐中電灯</option>
+                            <option value="包丁">包丁</option>
+                            <option value="ロープ">ロープ</option>
+                            <option value="タバコ">タバコ</option>
+                            <option value="いちごパック">いちごパック</option>
+                            <option value="ティーカップ">ティーカップ</option>
+                            <option value="窓ガラス">窓ガラス</option>
+                            <option value="座布団">座布団</option>
+                            <option value="卒アル">卒業アルバム</option>
+                            */
             }
 
             hintTitles.push(hintValue);
@@ -312,7 +318,7 @@ document.getElementById('submitAnswer').addEventListener('click', () => {
         displayConfirmAlert(`本当にこの解答でよろしいですか？<br>犯人: ${culprits[currentCulpritIndex].name}`, () => {
             if (currentCulpritIndex === 3) {
                 answerStage = 1;
-                displayAlert("正解!!<br>次に、犯行時刻を選択してください。<br>(新たなヒントが見つかりました)");
+                displayAlert("正解!!<br>次に、犯行時刻を選択してください。");
                 document.querySelector(".answer-first").classList.add("hidden");
                 document.querySelector(".answer-second").classList.remove("hidden");
                 confetti({
@@ -418,12 +424,16 @@ function showResult(isCorrect) {
             rank = "X級";
         } else if (score >= 100) {
             rank = "C級";
-        } else if (score === -1) {
-            rank = "惜しい";
+        } else {
+            rank = "見習い";
         }
     } else {
+        if(answerStage === 1) {
+            rank = "C級";
+        }else {
+            rank = "見習い";
+        }
         score = "ー";
-        rank = "見習い";
         document.getElementById('correctBonusScore').parentElement.style.display = 'none'; // 不正解の場合は正解ボーナスを非表示
     }
 
