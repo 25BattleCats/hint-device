@@ -212,8 +212,7 @@ button {
 /* 背景設定 */
 
 .notebook {
-    width: 80%;
-    max-width: 800px;
+    width: 800px;
     height: 500px;
     z-index: 99;
     margin: 50px auto;
@@ -979,4 +978,8 @@ input[type="range"]:focus::-webkit-slider-thumb {
 #thankYou {
     margin-top: 60px;
     margin-bottom: 10px;
+}
+
+.gosa {
+    margin: 30px 0;
 }
